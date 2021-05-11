@@ -1,0 +1,32 @@
+entity Produit{
+	nom String required unique,
+    img String required,
+    prix Double required min(0) 
+    
+}
+
+entity Categorie{
+	nom String required unique
+}
+
+entity Commande{
+	date LocalDate required
+    
+}
+
+entity ProdCommande{
+	quantite Integer required min(1)
+}
+
+
+
+relationship ManyToOne {
+	Produit{categorie required} to Categorie
+    ProdCommande{produit required} to Produit
+    ProdCommande{commande required} to Commande
+    Commande{user required} to User  
+}
+
+paginate Produit with pagination
+dto * with mapstruct
+service all with serviceImpl
