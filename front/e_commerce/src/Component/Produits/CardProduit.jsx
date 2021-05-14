@@ -12,7 +12,6 @@ const CardProduit = ({produit}) => {
                     <h3 className="card-title">{produit.nom}</h3> 
                     <p>{produit.prix} €</p>
                 </div>
-                <p>{produit.categorieId}</p>
                 <Link to={"/produit?id="+produit.id} className="btn btn-success d-block m-auto">Details</Link> 
             </div>
             

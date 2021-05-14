@@ -21,10 +21,13 @@ entity ProdCommande{
 
 
 relationship ManyToOne {
-	Produit{categorie required} to Categorie
     ProdCommande{produit required} to Produit
     ProdCommande{commande required} to Commande
     Commande{user required} to User  
+}
+
+relationship OneToMany {
+	  Categorie{produits} to Produit{categorie required}
 }
 
 paginate Produit with pagination

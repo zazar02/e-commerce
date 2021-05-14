@@ -124,7 +124,7 @@ export const ProduitUpdate = (props: IProduitUpdateProps) => {
                   {categories
                     ? categories.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.nom}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

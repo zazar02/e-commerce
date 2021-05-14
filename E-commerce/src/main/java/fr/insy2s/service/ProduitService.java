@@ -5,6 +5,7 @@ import fr.insy2s.service.dto.ProduitDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -43,4 +44,14 @@ public interface ProduitService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+     /**
+     * Get all the produits by ctaegorie
+     *
+     * @param String name of categorie.
+     * @return the list of entities.
+     */
+    List<ProduitDTO> findProduitByCategorie(String nomCategorie);
+
+
 }

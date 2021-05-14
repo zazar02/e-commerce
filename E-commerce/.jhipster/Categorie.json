@@ -7,7 +7,14 @@
       "fieldValidateRules": ["required", "unique"]
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "produit",
+      "otherEntityRelationshipName": "categorie",
+      "relationshipName": "produits"
+    }
+  ],
   "changelogDate": "20210511120820",
   "entityTableName": "categorie",
   "dto": "mapstruct",

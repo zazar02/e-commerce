@@ -10,11 +10,9 @@ const DetailProduit = () => {
     const id=location.search.substring(4)
 
     useEffect(() => {
-        console.log(id)
-        api.get("/produits/"+id).then((resp)=>{
+        api.get("/produit/"+id).then((resp)=>{
             setProduit(resp.data)
             setLoad(false)
-            console.log(resp.data)
         })
     },[id])
 

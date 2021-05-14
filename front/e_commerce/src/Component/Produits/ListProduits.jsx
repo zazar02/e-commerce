@@ -9,15 +9,30 @@ const ListProduits = () => {
     const [categories,setCategories]=useState()
     const [selectedCategorie,setSelectedCategorie]=useState("")
 
+
     useEffect(() => {
-        api.get("/produits").then((resp)=>{
-            setProduits(resp.data)
-            api.get("/categories").then((resp2) =>{
-                setCategories(resp2.data)
-                setLoad(false)
+        if(selectedCategorie===""){
+            api.get("/produits").then((resp)=>{
+                setProduits(resp.data)
+                api.get("/categories").then((resp2) =>{
+                    setCategories(resp2.data)
+                    setLoad(false)
+                })
             })
-        })
-    },[])
+        }
+        else{
+            api.get("/produits/"+selectedCategorie).then((resp)=>{
+                setProduits(resp.data)
+                api.get("/categories").then((resp2) =>{
+                    setCategories(resp2.data)
+                    setLoad(false)
+                })
+            })
+        }
+        
+    },[selectedCategorie])
+
+
 
     console.log(produits);
 
@@ -32,7 +47,7 @@ const ListProduits = () => {
                     {
                         categories.map((categorie) => {
                             return (
-                                    <li className="nav-item">
+                                    <li className="nav-item" key={categorie.id}>
                                         <p className="nav-link" data-toggle="pill" onClick={() => setSelectedCategorie(categorie.nom)}>{categorie.nom} </p>   
                                     </li>
                                 )

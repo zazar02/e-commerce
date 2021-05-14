@@ -22,7 +22,7 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "categorie",
-      "otherEntityRelationshipName": "produit",
+      "otherEntityRelationshipName": "produits",
       "relationshipValidateRules": "required",
       "relationshipName": "categorie",
       "otherEntityField": "id"

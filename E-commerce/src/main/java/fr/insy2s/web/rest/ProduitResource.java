@@ -104,7 +104,7 @@ public class ProduitResource {
      * @param id the id of the produitDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the produitDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/produits/{id}")
+    @GetMapping("/produit/{id}")
     public ResponseEntity<ProduitDTO> getProduit(@PathVariable Long id) {
         log.debug("REST request to get Produit : {}", id);
         Optional<ProduitDTO> produitDTO = produitService.findOne(id);
@@ -122,5 +122,17 @@ public class ProduitResource {
         log.debug("REST request to delete Produit : {}", id);
         produitService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+      /**
+     * {@code GET  /produits/:categorie} : get the "id" produit.
+     *
+     * @param id the id of the produitDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the produitDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/produits/{nomCategorie}")
+    public List<ProduitDTO> getProduitByCategorie(@PathVariable String nomCategorie) {
+        log.debug("REST request to get Produit by categorie : {}", nomCategorie);
+        return produitService.findProduitByCategorie(nomCategorie);
     }
 }

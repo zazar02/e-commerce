@@ -3,8 +3,10 @@ package fr.insy2s.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
+import javax.persistence.FetchType;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Categorie.
@@ -23,6 +25,9 @@ public class Categorie implements Serializable {
     @NotNull
     @Column(name = "nom", nullable = false, unique = true)
     private String nom;
+
+    @OneToMany(mappedBy = "categorie")
+    private Set<Produit> produits = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -44,6 +49,31 @@ public class Categorie implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Set<Produit> getProduits() {
+        return produits;
+    }
+
+    public Categorie produits(Set<Produit> produits) {
+        this.produits = produits;
+        return this;
+    }
+
+    public Categorie addProduits(Produit produit) {
+        this.produits.add(produit);
+        produit.setCategorie(this);
+        return this;
+    }
+
+    public Categorie removeProduits(Produit produit) {
+        this.produits.remove(produit);
+        produit.setCategorie(null);
+        return this;
+    }
+
+    public void setProduits(Set<Produit> produits) {
+        this.produits = produits;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

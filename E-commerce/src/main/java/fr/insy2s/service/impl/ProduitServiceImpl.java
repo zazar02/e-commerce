@@ -13,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.LinkedList;
 
 /**
  * Service Implementation for managing {@link Produit}.
@@ -62,5 +65,14 @@ public class ProduitServiceImpl implements ProduitService {
     public void delete(Long id) {
         log.debug("Request to delete Produit : {}", id);
         produitRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProduitDTO> findProduitByCategorie(String nomCategorie) {
+        log.debug("Request to get Produit by Categorie : {}", nomCategorie);
+        return produitRepository.FindProduitByCategorie(nomCategorie).stream()
+            .map(produitMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }
