@@ -24,6 +24,7 @@ const DetailProduit = () => {
                 <img src={produit.img} alt={"image "+produit.nom}/>
             </div>
             <p className="text-center"><strong>Prix : </strong>{produit.prix} €</p>
+            <button className="btn btn-success d-flex m-auto">Ajouter au panier</button>
             
 
         </div>

@@ -32,23 +32,22 @@ const ListProduits = () => {
         
     },[selectedCategorie])
 
-
-
-    console.log(produits);
-
     if (load) return <h1>Loading</h1>
     return (
+        
         <div className="row m-2">
             <div className="col-2">
+                <h4>Categorie</h4>
+                <hr></hr>
                 <ul className="nav flex-column nav-pills">
                     <li className="nav-item">
-                        <p className="nav-link" data-toggle="pill" onClick={() => setSelectedCategorie("")}>all</p>   
+                        <p className="nav-link cat-link" data-toggle="pill" onClick={() => setSelectedCategorie("")}>all</p>   
                     </li>
                     {
                         categories.map((categorie) => {
                             return (
                                     <li className="nav-item" key={categorie.id}>
-                                        <p className="nav-link" data-toggle="pill" onClick={() => setSelectedCategorie(categorie.nom)}>{categorie.nom} </p>   
+                                        <p className="nav-link cat-link" data-toggle="pill" onClick={() => setSelectedCategorie(categorie.nom)}>{categorie.nom} </p>   
                                     </li>
                                 )
                         })
@@ -62,6 +61,8 @@ const ListProduits = () => {
                     })
                 }
             </div>
+
+            
         </div>
     );
 };
