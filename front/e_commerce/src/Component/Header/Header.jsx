@@ -1,11 +1,21 @@
 
 import { Link, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Header = ({ isConnect,setConnect }) => {
 
 	const history=useHistory()
 
-	const user = null
+	const [user,setUser]=useState()
+
+	useEffect(() => {
+		
+	},[])
+
+
+
+
 
 	
 	const disconnect = () => {
@@ -40,15 +50,20 @@ const Header = ({ isConnect,setConnect }) => {
 					
 					<ul className="navbar-nav">
 						<li className="nav-item dropdown dropleft d-flex align-items-baseline">
+							<Link to="/panier" className="nav-link panier">
+								<i className="fas fa-shopping-cart fa-2x">
+									<span className="badge badge-danger">0</span>
+								</i>
+								
 							
-
+							</Link>
 							<Link to="/" className="nav-link" id="navbardrop" data-toggle="dropdown">
 								<i className="far fa-user-circle fa-lg"></i>
 							</Link>
 							<div className="dropdown-menu">
 								<Link to="/profil" className="dropdown-item">Profil</Link>
 								<hr></hr>
-								<p onClick={disconnect} className="dropdown-item"> <i className="fas fa-power-off mr-2"></i>Se déconnecter</p>
+								<p onClick={disconnect} className="dropdown-item disconnect"> <i className="fas fa-power-off mr-2"></i>Se déconnecter</p>
 							</div>
 						<p className="text-white">pseudo</p>
 						</li>

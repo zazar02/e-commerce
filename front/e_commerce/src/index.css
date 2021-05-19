@@ -46,3 +46,18 @@ nav .navbar-brand{
 .cat-link:hover{
   background-color: #82eb9b;
 }
+
+.panier i{
+  position: relative;
+}
+
+.panier span{
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  font-size: 14px;
+}
+
+.disconnect{
+  cursor: pointer;
+}

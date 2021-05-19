@@ -7,6 +7,7 @@ class App extends Component {
 
 	state = {
         isConnect: false,
+		panier:null,
     }
 
 
@@ -14,13 +15,16 @@ class App extends Component {
         this.setState({ isConnect: bool})
     }
 
-	
+	setPanier = (commande) => {
+        this.setState({ panier: commande})
+    }
+
 
 	render() {
 		return (
 			<BrowserRouter>
 				<Header isConnect={this.state.isConnect} setConnect={this.setConnect}/>
-				<Routes setConnect={this.setConnect}/>
+				<Routes isConnect={this.state.isConnect} setConnect={this.setConnect}/>
 			</BrowserRouter>
 		);
 	}
