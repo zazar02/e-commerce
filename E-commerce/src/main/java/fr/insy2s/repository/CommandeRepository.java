@@ -16,4 +16,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
     @Query("select commande from Commande commande where commande.user.login = ?#{principal.username}")
     List<Commande> findByUserIsCurrentUser();
+
+    @Query("select c from Commande c where c.user.login = ?1 order by c.date desc")
+    Commande findByUserLogin(String login);
 }

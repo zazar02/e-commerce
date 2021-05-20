@@ -1,10 +1,13 @@
 package fr.insy2s.service.impl;
 
+import fr.insy2s.domain.ProdCommande;
 import fr.insy2s.service.CommandeService;
 import fr.insy2s.domain.Commande;
 import fr.insy2s.repository.CommandeRepository;
+import fr.insy2s.service.ProdCommandeService;
 import fr.insy2s.service.dto.CommandeDTO;
 import fr.insy2s.service.mapper.CommandeMapper;
+import fr.insy2s.wrapper.Panier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +30,13 @@ public class CommandeServiceImpl implements CommandeService {
 
     private final CommandeRepository commandeRepository;
 
+    private final ProdCommandeService prodCommandeService;
+
     private final CommandeMapper commandeMapper;
 
-    public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeMapper commandeMapper) {
+    public CommandeServiceImpl(CommandeRepository commandeRepository, ProdCommandeService prodCommandeService, CommandeMapper commandeMapper) {
         this.commandeRepository = commandeRepository;
+        this.prodCommandeService = prodCommandeService;
         this.commandeMapper = commandeMapper;
     }
 
@@ -64,5 +70,17 @@ public class CommandeServiceImpl implements CommandeService {
     public void delete(Long id) {
         log.debug("Request to delete Commande : {}", id);
         commandeRepository.deleteById(id);
+    }
+
+    @Override
+    public Panier findByUserLogin(String login) {
+        Commande com=commandeRepository.findByUserLogin(login);
+        if(com==null){
+            return new Panier();
+        }
+        List<ProdCommande> prodCommandes=prodCommandeService.findByCommandeId(com.getId());
+        Panier panier = new Panier();
+        panier.setProdCommandes(prodCommandes);
+        return panier;
     }
 }

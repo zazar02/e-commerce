@@ -1,5 +1,6 @@
 package fr.insy2s.service;
 
+import fr.insy2s.domain.ProdCommande;
 import fr.insy2s.service.dto.ProdCommandeDTO;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public interface ProdCommandeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<ProdCommande> findByCommandeId(Long id);
 }

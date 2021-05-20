@@ -1,6 +1,7 @@
 package fr.insy2s.service;
 
 import fr.insy2s.service.dto.CommandeDTO;
+import fr.insy2s.wrapper.Panier;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,4 +41,6 @@ public interface CommandeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Panier findByUserLogin(String login);
 }

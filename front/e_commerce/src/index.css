@@ -61,3 +61,17 @@ nav .navbar-brand{
 .disconnect{
   cursor: pointer;
 }
+
+.input-qte{
+  width: 100px !important;
+  text-align: center;
+}
+
+.table-panier td{
+  display: table-cell;
+  vertical-align: middle !important;
+}
+
+.table-panier img{
+  width:100px;
+}

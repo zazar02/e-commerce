@@ -7,7 +7,7 @@ class App extends Component {
 
 	state = {
         isConnect: false,
-		panier:null,
+		panier:[],
     }
 
 

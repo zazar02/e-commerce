@@ -1,9 +1,11 @@
 package fr.insy2s.web.rest;
 
+import fr.insy2s.security.SecurityUtils;
 import fr.insy2s.service.CommandeService;
 import fr.insy2s.web.rest.errors.BadRequestAlertException;
 import fr.insy2s.service.dto.CommandeDTO;
 
+import fr.insy2s.wrapper.Panier;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -113,5 +115,12 @@ public class CommandeResource {
         log.debug("REST request to delete Commande : {}", id);
         commandeService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/commande/current-user")
+    public Panier getCommandeByUserId() {
+        String login= SecurityUtils.getCurrentUserLogin().orElse("");
+        log.debug("REST request to get Commande : {}", login);
+        return commandeService.findByUserLogin(login);
     }
 }

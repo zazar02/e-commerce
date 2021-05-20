@@ -10,13 +10,8 @@ const Header = ({ isConnect,setConnect }) => {
 	const [user,setUser]=useState()
 
 	useEffect(() => {
-		
+				
 	},[])
-
-
-
-
-
 	
 	const disconnect = () => {
 		localStorage.clear()

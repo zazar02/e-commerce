@@ -65,4 +65,10 @@ public class ProdCommandeServiceImpl implements ProdCommandeService {
         log.debug("Request to delete ProdCommande : {}", id);
         prodCommandeRepository.deleteById(id);
     }
+
+    @Override
+    public List<ProdCommande> findByCommandeId(Long id) {
+        log.debug("Request to get ProdCommande : {}", id);
+        return prodCommandeRepository.findByCommandeId(id);
+    }
 }
