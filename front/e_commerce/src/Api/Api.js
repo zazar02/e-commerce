@@ -7,5 +7,7 @@ const api=axios.create({
 export default api;
 
 api.interceptors.request.use((req) => {
+    const token = localStorage.getItem('token')
+    req.headers["Authorization"] = "Bearer "+ token
     return req  
 })
