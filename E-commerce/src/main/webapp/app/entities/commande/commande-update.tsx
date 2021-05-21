@@ -91,6 +91,19 @@ export const CommandeUpdate = (props: ICommandeUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
+                <Label id="statusLabel" for="commande-status">
+                  Status
+                </Label>
+                <AvField
+                  id="commande-status"
+                  type="text"
+                  name="status"
+                  validate={{
+                    required: { value: true, errorMessage: 'This field is required.' },
+                  }}
+                />
+              </AvGroup>
+              <AvGroup>
                 <Label for="commande-user">User</Label>
                 <AvInput id="commande-user" type="select" className="form-control" name="userId" required>
                   {users

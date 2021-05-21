@@ -26,6 +26,10 @@ public class Commande implements Serializable {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
+
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "commandes", allowSetters = true)
@@ -51,6 +55,19 @@ public class Commande implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Commande status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public User getUser() {
@@ -89,6 +106,7 @@ public class Commande implements Serializable {
         return "Commande{" +
             "id=" + getId() +
             ", date='" + getDate() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

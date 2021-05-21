@@ -38,6 +38,9 @@ public class CommandeResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
+
     @Autowired
     private CommandeRepository commandeRepository;
 
@@ -63,7 +66,8 @@ public class CommandeResourceIT {
      */
     public static Commande createEntity(EntityManager em) {
         Commande commande = new Commande()
-            .date(DEFAULT_DATE);
+            .date(DEFAULT_DATE)
+            .status(DEFAULT_STATUS);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -79,7 +83,8 @@ public class CommandeResourceIT {
      */
     public static Commande createUpdatedEntity(EntityManager em) {
         Commande commande = new Commande()
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .status(UPDATED_STATUS);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -109,6 +114,7 @@ public class CommandeResourceIT {
         assertThat(commandeList).hasSize(databaseSizeBeforeCreate + 1);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
         assertThat(testCommande.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testCommande.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -154,6 +160,26 @@ public class CommandeResourceIT {
 
     @Test
     @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = commandeRepository.findAll().size();
+        // set the field null
+        commande.setStatus(null);
+
+        // Create the Commande, which fails.
+        CommandeDTO commandeDTO = commandeMapper.toDto(commande);
+
+
+        restCommandeMockMvc.perform(post("/api/commandes")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(commandeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Commande> commandeList = commandeRepository.findAll();
+        assertThat(commandeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCommandes() throws Exception {
         // Initialize the database
         commandeRepository.saveAndFlush(commande);
@@ -163,7 +189,8 @@ public class CommandeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(commande.getId().intValue())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
     
     @Test
@@ -177,7 +204,8 @@ public class CommandeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(commande.getId().intValue()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
     @Test
     @Transactional
@@ -200,7 +228,8 @@ public class CommandeResourceIT {
         // Disconnect from session so that the updates on updatedCommande are not directly saved in db
         em.detach(updatedCommande);
         updatedCommande
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .status(UPDATED_STATUS);
         CommandeDTO commandeDTO = commandeMapper.toDto(updatedCommande);
 
         restCommandeMockMvc.perform(put("/api/commandes")
@@ -213,6 +242,7 @@ public class CommandeResourceIT {
         assertThat(commandeList).hasSize(databaseSizeBeforeUpdate);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
         assertThat(testCommande.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testCommande.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

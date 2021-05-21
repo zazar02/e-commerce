@@ -11,6 +11,7 @@ entity Categorie{
 
 entity Commande{
 	date LocalDate required
+    status String required
     
 }
 

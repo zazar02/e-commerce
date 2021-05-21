@@ -29,6 +29,10 @@ export const CommandeDetail = (props: ICommandeDetailProps) => {
             <span id="date">Date</span>
           </dt>
           <dd>{commandeEntity.date ? <TextFormat value={commandeEntity.date} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="status">Status</span>
+          </dt>
+          <dd>{commandeEntity.status}</dd>
           <dt>User</dt>
           <dd>{commandeEntity.userId ? commandeEntity.userId : ''}</dd>
         </dl>

@@ -34,6 +34,7 @@ export const Commande = (props: ICommandeProps) => {
               <tr>
                 <th>ID</th>
                 <th>Date</th>
+                <th>Status</th>
                 <th>User</th>
                 <th />
               </tr>
@@ -47,6 +48,7 @@ export const Commande = (props: ICommandeProps) => {
                     </Button>
                   </td>
                   <td>{commande.date ? <TextFormat type="date" value={commande.date} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
+                  <td>{commande.status}</td>
                   <td>{commande.userId ? commande.userId : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

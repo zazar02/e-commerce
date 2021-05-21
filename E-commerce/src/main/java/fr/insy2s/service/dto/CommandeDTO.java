@@ -14,6 +14,9 @@ public class CommandeDTO implements Serializable {
     @NotNull
     private LocalDate date;
 
+    @NotNull
+    private String status;
+
 
     private Long userId;
     
@@ -31,6 +34,14 @@ public class CommandeDTO implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getUserId() {
@@ -64,6 +75,7 @@ public class CommandeDTO implements Serializable {
         return "CommandeDTO{" +
             "id=" + getId() +
             ", date='" + getDate() + "'" +
+            ", status='" + getStatus() + "'" +
             ", userId=" + getUserId() +
             "}";
     }
