@@ -5,7 +5,7 @@ import api from '../Api/Api';
 import { useHistory } from 'react-router';
 
 
-const Login = ({setConnect}) => {
+const Login = ({setConnect,setPanier}) => {
 
     const initialValues = {
         username: '',
@@ -24,6 +24,15 @@ const Login = ({setConnect}) => {
         api.post("/authenticate",values).then((resp)=> {
             localStorage.setItem('token',resp.data.id_token)
             setConnect(true)
+            api.get("/commande/current-user").then((resp) => {
+
+                if(resp.data.prodCommandes !=null){
+                    setPanier(resp.data.prodCommandes)
+                }
+                else{
+                    api.post("")
+                }
+             })
             history.push('/')
         })
     }

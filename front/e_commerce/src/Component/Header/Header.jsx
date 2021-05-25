@@ -1,13 +1,11 @@
 
 import { Link, useHistory } from 'react-router-dom';
-import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Header = ({ isConnect,setConnect }) => {
+const Header = ({ isConnect,setConnect,panier,setPanier }) => {
 
 	const history=useHistory()
 
-	const [user,setUser]=useState()
 
 	useEffect(() => {
 				
@@ -16,6 +14,7 @@ const Header = ({ isConnect,setConnect }) => {
 	const disconnect = () => {
 		localStorage.clear()
 		setConnect(false)
+		setPanier(null)
 		history.push('/')
 	} 
 
@@ -47,7 +46,9 @@ const Header = ({ isConnect,setConnect }) => {
 						<li className="nav-item dropdown dropleft d-flex align-items-baseline">
 							<Link to="/panier" className="nav-link panier">
 								<i className="fas fa-shopping-cart fa-2x">
-									<span className="badge badge-danger">0</span>
+									{
+										(panier ? <span className="badge badge-danger">{panier.length}</span> : <span className="badge badge-danger">0</span>)
+									}
 								</i>
 								
 							

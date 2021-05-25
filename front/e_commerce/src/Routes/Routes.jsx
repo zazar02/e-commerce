@@ -11,16 +11,18 @@ class Routes extends Component {
 
    
     render() {
-        const {isConnect,setConnect}=this.props
+        const {isConnect,setConnect,panier,setPanier}=this.props
         return (
             <Switch>
                 <Route exact path="/login">
-                    <Login setConnect={setConnect}/>
+                    <Login setConnect={setConnect} setPanier={setPanier}/>
                 </Route>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/produit" component={DetailProduit}/>
                 {
-                    (isConnect && <Route exact path="/panier" component={Panier}/>)
+                    (isConnect && <Route exact path="/panier">
+                        <Panier panier={panier}/>
+                    </Route>)
                 }
                 <Route component={NotFound}/>
 			</Switch>

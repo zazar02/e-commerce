@@ -23,8 +23,8 @@ class App extends Component {
 	render() {
 		return (
 			<BrowserRouter>
-				<Header isConnect={this.state.isConnect} setConnect={this.setConnect}/>
-				<Routes isConnect={this.state.isConnect} setConnect={this.setConnect}/>
+				<Header isConnect={this.state.isConnect} setConnect={this.setConnect} panier={this.state.panier} setPanier={this.setPanier}/>
+				<Routes isConnect={this.state.isConnect} setConnect={this.setConnect} panier={this.state.panier} setPanier={this.setPanier}/>
 			</BrowserRouter>
 		);
 	}
